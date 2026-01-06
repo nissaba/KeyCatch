@@ -6,6 +6,8 @@
 //
 
 import SwiftUI
+import ApplicationServices
+import AppKit
 
 @main
 struct KeyCatchApp: App {
