@@ -27,6 +27,7 @@
 		8C8CF3F02F0B0A5E00D56A82 /* KeyCatch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KeyCatch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8C8CF3FD2F0B0A6000D56A82 /* KeyCatchTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KeyCatchTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8C8CF4072F0B0A6000D56A82 /* KeyCatchUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KeyCatchUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		8CF486DF2F0D8E7900505DD2 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -75,6 +76,7 @@
 		8C8CF3E72F0B0A5E00D56A82 = {
 			isa = PBXGroup;
 			children = (
+				8CF486DF2F0D8E7900505DD2 /* README.md */,
 				8C8CF3F22F0B0A5E00D56A82 /* KeyCatch */,
 				8C8CF4002F0B0A6000D56A82 /* KeyCatchTests */,
 				8C8CF40A2F0B0A6000D56A82 /* KeyCatchUITests */,

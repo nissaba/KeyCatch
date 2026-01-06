@@ -1,43 +1,55 @@
-# GlobalInputExample (macOS)
+# KeyCatch (macOS)
 
-A minimal macOS example app that demonstrates how to capture **global keyboard and mouse input** using a **CGEvent tap**, with the required **Accessibility permissions**.
+A minimal macOS example app that captures global keyboard and mouse input using a CGEvent tap, with the required Accessibility permissions.
 
 ## Overview
 
 This project is a **small, focused macOS example** showing how to listen to system-wide input events, even when the app is not in the foreground.
 
 It demonstrates how to:
-- Capture global **keyboard events** (keyDown, keyUp)
-- Detect **modifier key changes** (flagsChanged)
-- Monitor **mouse clicks** and **scroll events**
-- Set up a **CGEvent tap** using Core Graphics
-- Handle the **Accessibility permission workflow**
-- Display live input updates using **SwiftUI** and **Combine**
-
-The goal of this app is **educational**: to provide a clean, easy-to-read reference for developers who need to understand how global input monitoring works on macOS.
+- Capture global keyboard presses (keyDown)
+- Show modifier combinations with keys (e.g., “KeyPressed: <Shift> + d”)
+- Detect standalone modifier key changes (flagsChanged) and report presses only
+- Monitor mouse clicks and scroll events
+- Set up a CGEvent tap using Core Graphics
+- Handle the Accessibility permission workflow
+- Display live input updates using SwiftUI and Combine
 
 ## What this example does
 
-- Creates a CGEventTap to listen to global system events
-- Registers the tap on the current user session
-- Streams captured events into a SwiftUI interface
-- Reacts to permission issues (Accessibility not granted)
-- Keeps the code intentionally **minimal and readable**
+- Creates a CGEvent tap to listen to global system events
+- Registers and enables the tap on the current user session
+- Streams captured events into a SwiftUI interface via Combine
+- Reacts to permission issues (Accessibility not granted) and offers to open Settings
+- Keeps the code intentionally minimal and readable
+
+## Current behavior details
+
+- Key presses:
+  - Uses charactersIgnoringModifiers to keep the base character and prepends active modifiers
+  - Example: pressing Shift + d shows “KeyPressed: <Shift> + d”
+  - Falls back to keyCode when no character is available
+
+- Modifier-only presses:
+  - Uses flagsChanged events and reports “Shift Pressed”, “Control Pressed”, etc.
+  - Releases are intentionally not reported
+
+- Mouse:
+  - Reports left, right, middle, and other mouse button presses with a readable name
+  - Reports scroll deltas (ΔY and ΔX)
 
 ## Permissions
 
-⚠️ **Accessibility permission is required**
+Accessibility permission is required to observe global input.
 
-macOS does not allow global input capture by default.  
-When running this app, you must grant **Accessibility** access:
+System Settings → Privacy & Security → Accessibility → Enable KeyCatch
 
-**System Settings → Privacy & Security → Accessibility**
-
-Once enabled, restart the app for the event tap to become active.
+If permission isn’t granted, the app shows a warning and offers to open the correct settings pane.
 
 ## Why CGEvent taps?
 
-CGEventTap is the **official and lowest-level API** provided by macOS to observe:
+CGEvent taps are the system-supported way to observe global input on macOS:
+
 - Global keyboard input
 - Modifier state changes
 - Mouse and scroll events
@@ -48,7 +60,7 @@ This example avoids private APIs and focuses on **correct, system-supported beha
 
 - Not a keylogger
 - Not intended for production spying or monitoring
-- Not sandbox-compatible without special entitlements
+- Not sandbox-compatible without special configuration
 
 It is strictly a **learning and reference project**.
 
@@ -67,8 +79,9 @@ This pattern is useful for:
 - Swift
 - SwiftUI
 - Combine
-- Core Graphics (CGEventTap)
+- Core Graphics (CGEvent tap)
 
 ## License
 
 MIT — use freely, learn from it, and adapt it to your needs.
+
